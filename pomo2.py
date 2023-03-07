@@ -26,21 +26,30 @@ settings.subheader("""
 Timer Settings (mins)
 """
 )
-focus = settings.text_input("Focus: ", value = 25)
+focus = int(settings.text_input("Focus: ", value = 25))
+focus = convert(focus)
 short = settings.text_input("Short Break: ", value = 5)
+short = convert(short)
 long = settings.text_input("Long Break: ", value = 15)
 submit = settings.form_submit_button("Start")
 
 if submit:
     with st.empty():
         while focus:
-            f = convert(focus)
-            mins, secs = divmod(f, 60)
+            mins, secs = divmod(focus, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
-            st.metric("⏱️", value=timer)
+            st.header(f"⏱️ {timer}")
             time.sleep(1)
-            f -= 1
+            focus -= 1
             st.success("🎉 25 minutes done, time for a break!")
+        while short:
+            s = convert(short)
+            mins, secs = divmod(s, 60)
+            timer = '{:02d}:{:02d}'.format(mins, secs)
+            st.header(f"⏱️ {timer}")
+            time.sleep(1)
+            s -= 1
+            st.success("Back to it!")
 
 
 
