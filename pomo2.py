@@ -24,6 +24,10 @@ settings.subheader("""
 Timer Settings (mins)
 """
 )
+st.caption("""
+To reset the timer, press stop at the top right corner. 
+Then updated the value and hit start. 
+""")
 focus = int(settings.text_input("Focus: ", value = 25))
 focus = convert(focus)
 short = settings.text_input("Short Break: ", value = 5)
