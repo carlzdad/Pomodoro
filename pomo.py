@@ -26,11 +26,11 @@ To edit the timer, update the setting value and click start.
 # To reset the Pomo Sessions counter, please refresh the page. 
 # """
 # )
-focus = int(settings.text_input("Focus: ", value = 1))
+focus = int(settings.text_input("Focus: ", value = 25))
 focus = convert(focus)
-short = settings.text_input("Short Break: ", value = 1)
+short = settings.text_input("Short Break: ", value = 5)
 short = convert(short)
-long = int(settings.text_input("Long Break: ", value = 2))
+long = int(settings.text_input("Long Break: ", value = 30))
 long = convert(long)
 
 start = settings.form_submit_button("Start")
