@@ -11,8 +11,6 @@ import time
 # --- Greeting ---
 st.title("""
 ⏱️ Welcome to Pomodoro!
-
-Let's get focused.
 """
 )
 
@@ -26,29 +24,51 @@ settings.subheader("""
 Timer Settings (mins)
 """
 )
-focus = int(settings.text_input("Focus: ", value = 25))
+focus = int(settings.text_input("Focus: ", value = 1))
 focus = convert(focus)
-short = settings.text_input("Short Break: ", value = 5)
+short = settings.text_input("Short Break: ", value = 1)
 short = convert(short)
-long = settings.text_input("Long Break: ", value = 15)
+long = int(settings.text_input("Long Break: ", value = 15))
+long = convert(long)
 submit = settings.form_submit_button("Start")
+
+pomo_count = []
+
 
 if submit:
     with st.empty():
         while focus:
             mins, secs = divmod(focus, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
-            st.header(f"⏱️ {timer}")
+            st.header(f"""
+            ⏱️ {timer}
+            Let's get focused.
+            """)
             time.sleep(1)
             focus -= 1
-            st.success("🎉 25 minutes done, time for a break!")
+            st.success("🎉 Time for a break!")
+            pomo_count.append('1')
+            # if len(pomo_count) == 4:
+            #     while long:
+            #         st.success("🎉 Time for a long break!")
+            #         mins, secs = divmod(long, 60)
+            #         timer = '{:02d}:{:02d}'.format(mins, secs)
+            #         st.header(f"""
+            #         ⏱️ {timer}
+            #         Get up, take a break, see you in 30.
+            #         """)
+            #         time.sleep(1)
+            #         long -= 1
+
         while short:
-            s = convert(short)
-            mins, secs = divmod(s, 60)
+            mins, secs = divmod(short, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
-            st.header(f"⏱️ {timer}")
+            st.header(f"""
+            ⏱️ {timer}
+            Take a break!
+            """)
             time.sleep(1)
-            s -= 1
+            short -= 1
             st.success("Back to it!")
 
 
